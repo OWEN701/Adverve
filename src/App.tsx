@@ -1,6 +1,58 @@
-import { Bot, TrendingUp, Zap, Users, Mail, Globe, CheckCircle, ArrowRight, Menu, X, MessageSquare } from 'lucide-react';
+import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, Globe, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { Chatbot } from './components/Chatbot';
+
+const TOOLS = ['Clay', 'Smartlead', 'HeyReach', 'ZoomInfo', 'GHL', 'Lemlist', 'LinkedIn Sales Navigator', 'B2B Rocket'];
+
+const SERVICES = [
+  {
+    icon: <Zap className="h-8 w-8 text-white" />,
+    gradient: 'from-cyan-500 to-blue-600',
+    shadow: 'shadow-cyan-500/50',
+    title: 'Outreach System Builds',
+    description: 'Full campaign setup from list to booked call. We architect and deploy the complete outreach stack so you start booking meetings fast.',
+    bullets: ['ICP definition & list building', 'Sequence & campaign architecture', 'Inbox warm-up & deliverability setup'],
+  },
+  {
+    icon: <BarChart2 className="h-8 w-8 text-white" />,
+    gradient: 'from-blue-500 to-cyan-600',
+    shadow: 'shadow-blue-500/50',
+    title: 'Ongoing Campaign Management',
+    description: 'We run it, optimise it, report on it. Hands-off campaign management so your pipeline keeps moving without you touching it.',
+    bullets: ['Continuous A/B testing & optimisation', 'Weekly performance reporting', 'Reply handling & lead handoff'],
+  },
+  {
+    icon: <Database className="h-8 w-8 text-white" />,
+    gradient: 'from-teal-500 to-cyan-600',
+    shadow: 'shadow-teal-500/50',
+    title: 'List Building & Data Enrichment',
+    description: 'Targeted, verified, Clay-enriched prospect lists. The right contacts with the right data — built for outreach that actually lands.',
+    bullets: ['Clay-powered enrichment workflows', 'Email & LinkedIn verification', 'ZoomInfo & intent data integration'],
+  },
+  {
+    icon: <Settings className="h-8 w-8 text-white" />,
+    gradient: 'from-blue-600 to-blue-400',
+    shadow: 'shadow-blue-600/50',
+    title: 'CRM & Workflow Integration',
+    description: 'GHL and other CRM setup and automation. We connect your outreach to your CRM so no lead falls through the cracks.',
+    bullets: ['GoHighLevel (GHL) setup & automation', 'Lead routing & pipeline management', 'Cross-platform workflow automation'],
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote: 'Had our systems running within a week, supporting outreach across 9 clients simultaneously.',
+    name: 'Jody Parkinson',
+    initials: 'JP',
+    gradient: 'from-cyan-500 to-blue-600',
+  },
+  {
+    quote: 'Helped us close local millionaires in Quebec for our wealth management business.',
+    name: 'Thomas Barry',
+    initials: 'TB',
+    gradient: 'from-blue-500 to-cyan-600',
+  },
+];
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -24,7 +76,6 @@ function App() {
               <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Adverve</span>
             </div>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               <button onClick={() => scrollToSection('services')} className="hover:text-cyan-400 transition-colors">Services</button>
               <button onClick={() => scrollToSection('process')} className="hover:text-cyan-400 transition-colors">Process</button>
@@ -36,10 +87,9 @@ function App() {
               onClick={() => scrollToSection('contact')}
               className="hidden md:block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/30"
             >
-              Get Started
+              Book a Call
             </button>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 rounded-lg hover:bg-slate-800 transition-colors"
@@ -49,7 +99,6 @@ function App() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-slate-900 border-t border-slate-800">
             <div className="px-4 py-6 space-y-4">
@@ -57,7 +106,7 @@ function App() {
               <button onClick={() => scrollToSection('process')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Process</button>
               <button onClick={() => scrollToSection('results')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Results</button>
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Contact</button>
-              <button onClick={() => scrollToSection('contact')} className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 rounded-lg font-semibold mt-4">Get Started</button>
+              <button onClick={() => scrollToSection('contact')} className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 rounded-lg font-semibold mt-4">Book a Call</button>
             </div>
           </div>
         )}
@@ -69,18 +118,18 @@ function App() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-8">
               <Zap className="h-4 w-4 text-cyan-400" />
-              <span className="text-sm text-cyan-400 font-medium">AI-Powered Growth Solutions</span>
+              <span className="text-sm text-cyan-400 font-medium">B2B Outreach Infrastructure</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Unlock Unmatched Growth with
-              <span className="block mt-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                Expert Paid Traffic Solutions
+              We Build Outreach Infrastructure
+              <span className="block mt-2 bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-500 bg-clip-text text-transparent">
+                That Books Meetings.
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed">
-              More than a marketing agency — we're built to <span className="font-semibold text-white">EMPOWER</span> your business with cutting-edge AI automation and proven marketing strategies
+            <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed max-w-3xl mx-auto">
+              Not another marketing agency. We design, build and manage the backend systems behind <span className="font-semibold text-white">high-performance B2B outreach campaigns.</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -88,33 +137,33 @@ function App() {
                 onClick={() => scrollToSection('contact')}
                 className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl shadow-cyan-500/30 flex items-center space-x-2"
               >
-                <span>Start Free Strategy Call</span>
+                <span>Book a Discovery Call</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
-                onClick={() => scrollToSection('process')}
+                onClick={() => scrollToSection('services')}
                 className="px-8 py-4 rounded-xl font-semibold text-lg border-2 border-slate-700 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300"
               >
-                See How It Works
+                See What We Do
               </button>
             </div>
 
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+            {/* Stats Bar */}
+            <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">500+</div>
+                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">22</div>
+                <div className="text-sm text-slate-400">Clients Served</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">48</div>
                 <div className="text-sm text-slate-400">Campaigns Launched</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">3.5x</div>
-                <div className="text-sm text-slate-400">Avg ROI Increase</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">98%</div>
-                <div className="text-sm text-slate-400">Client Satisfaction</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">24/7</div>
-                <div className="text-sm text-slate-400">AI Support</div>
+              <div className="text-center flex flex-col items-center">
+                <div className="flex items-center justify-center space-x-1 mb-1">
+                  <MapPin className="h-5 w-5 text-cyan-400" />
+                  <span className="text-lg font-bold text-cyan-400">UK &amp; North America</span>
+                </div>
+                <div className="text-sm text-slate-400">Markets We Serve</div>
               </div>
             </div>
           </div>
@@ -125,223 +174,133 @@ function App() {
       <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">Comprehensive solutions designed to scale your business and maximize ROI</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">What We Do</h2>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+              Most businesses have the offer. They don't have the system. We build the infrastructure and run it using the tools serious outreach teams use.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Service 1 */}
-            <div className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-cyan-500 to-blue-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Globe className="h-8 w-8 text-white" />
+          <div className="grid md:grid-cols-2 gap-8">
+            {SERVICES.map((service) => (
+              <div key={service.title} className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
+                <div className={`bg-gradient-to-br ${service.gradient} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+                <p className="text-slate-300 mb-6 leading-relaxed">{service.description}</p>
+                <ul className="space-y-3">
+                  {service.bullets.map((b) => (
+                    <li key={b} className="flex items-start space-x-2">
+                      <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-slate-300">{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Website Creation & Smart Bots</h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                High-converting, lightning-fast websites paired with AI-powered chatbots that capture leads and provide 24/7 customer support automatically.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Conversion-optimized design</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">AI chatbot integration</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Mobile-first responsive</span>
-                </li>
-              </ul>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Service 2 */}
-            <div className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Bot className="h-8 w-8 text-white" />
+      {/* Our Stack Section */}
+      <section id="stack" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Stack</h2>
+          <p className="text-xl text-slate-400 mb-12">The tools serious outreach teams rely on.</p>
+          <div className="flex flex-wrap justify-center gap-4">
+            {TOOLS.map((tool) => (
+              <div
+                key={tool}
+                className="bg-slate-800 border border-slate-700 hover:border-cyan-500 hover:bg-slate-750 transition-all duration-200 rounded-xl px-6 py-3 text-slate-200 font-medium text-sm tracking-wide"
+              >
+                {tool}
               </div>
-              <h3 className="text-2xl font-bold mb-4">AI Lead Generation</h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Personalized, automated outreach campaigns across email and LinkedIn that nurture leads while you focus on closing deals.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Smart targeting algorithms</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Automated follow-up sequences</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Real-time lead scoring</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Service 3 */}
-            <div className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
-              <div className="bg-gradient-to-br from-blue-500 to-cyan-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Social Media Growth</h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Strategic content creation and audience expansion techniques that build your brand authority and drive engaged followers.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Data-driven content strategy</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Engagement optimization</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <CheckCircle className="h-5 w-5 text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-slate-300">Performance analytics</span>
-                </li>
-              </ul>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Process Section */}
-      <section id="process" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="process" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">A proven 3-step process to transform your marketing and accelerate growth</p>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">From zero to booked meetings — a clear, proven process</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* Connector Lines */}
-            <div className="hidden md:block absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-30" style={{ width: 'calc(100% - 12rem)', left: '6rem' }}></div>
+            <div className="hidden md:block absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-400 opacity-30" style={{ width: 'calc(100% - 12rem)', left: '6rem' }}></div>
 
-            {/* Step 1 */}
             <div className="relative text-center">
               <div className="bg-gradient-to-br from-cyan-500 to-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-cyan-500/50 relative z-10">
                 <span className="text-3xl font-bold">1</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Strategy Call</h3>
+              <h3 className="text-2xl font-bold mb-4">Discovery Call</h3>
               <p className="text-slate-300 leading-relaxed">
-                We dive deep into your business goals, target audience, and current challenges to create a custom growth roadmap.
+                We learn your ICP, current setup, and goals. Then we tell you exactly what needs building and what needs fixing.
               </p>
             </div>
 
-            {/* Step 2 */}
             <div className="relative text-center">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/50 relative z-10">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/50 relative z-10">
                 <span className="text-3xl font-bold">2</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Onboarding</h3>
+              <h3 className="text-2xl font-bold mb-4">System Build</h3>
               <p className="text-slate-300 leading-relaxed">
-                Our team sets up your campaigns, integrates AI tools, and configures everything for maximum performance and ROI.
+                We build the full outreach stack — lists, sequences, tooling, CRM — and get everything live and delivering.
               </p>
             </div>
 
-            {/* Step 3 */}
             <div className="relative text-center">
-              <div className="bg-gradient-to-br from-purple-500 to-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-purple-500/50 relative z-10">
+              <div className="bg-gradient-to-br from-blue-600 to-cyan-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/50 relative z-10">
                 <span className="text-3xl font-bold">3</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Campaign Launch</h3>
+              <h3 className="text-2xl font-bold mb-4">Managed &amp; Optimised</h3>
               <p className="text-slate-300 leading-relaxed">
-                Watch your campaigns go live with continuous optimization, detailed reporting, and dedicated support every step of the way.
+                We own the backend. You focus on closing. Monthly reporting keeps you across results without the noise.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Results/Testimonials Section */}
-      <section id="results" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Real Results, Real Growth</h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">See how we've helped businesses like yours achieve remarkable success</p>
+      {/* Testimonials Section */}
+      <section id="results" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">What Clients Say</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700">
-              <div className="flex items-center space-x-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
-              </div>
-              <p className="text-slate-300 mb-6 leading-relaxed italic">
-                "Adverve transformed our lead generation completely. We went from 20 leads per month to over 200 qualified leads with their AI automation. Game changer!"
-              </p>
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xl font-bold">
-                  JM
+          <div className="grid md:grid-cols-2 gap-8">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300">
+                <div className="flex items-center space-x-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-lg">★</span>
+                  ))}
                 </div>
-                <div>
-                  <div className="font-semibold">Jennifer Mitchell</div>
-                  <div className="text-sm text-slate-400">Online Course Creator</div>
+                <p className="text-slate-200 mb-8 leading-relaxed text-lg italic">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center space-x-3">
+                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold flex-shrink-0`}>
+                    {t.initials}
+                  </div>
+                  <div className="font-semibold text-white">{t.name}</div>
                 </div>
               </div>
-            </div>
-
-            {/* Testimonial 2 */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700">
-              <div className="flex items-center space-x-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
-              </div>
-              <p className="text-slate-300 mb-6 leading-relaxed italic">
-                "The ROI has been incredible. Within 3 months, we 5x'd our ad spend profitably. Their team knows exactly what they're doing."
-              </p>
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-xl font-bold">
-                  DR
-                </div>
-                <div>
-                  <div className="font-semibold">David Rodriguez</div>
-                  <div className="text-sm text-slate-400">SaaS Founder</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700">
-              <div className="flex items-center space-x-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">★</span>
-                ))}
-              </div>
-              <p className="text-slate-300 mb-6 leading-relaxed italic">
-                "Professional, responsive, and results-driven. They don't just run campaigns — they become a true growth partner for your business."
-              </p>
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-xl font-bold">
-                  SP
-                </div>
-                <div>
-                  <div className="font-semibold">Sarah Peterson</div>
-                  <div className="text-sm text-slate-400">E-commerce Owner</div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-4xl mx-auto">
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 md:p-12 border border-slate-700 shadow-2xl">
             <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Scale Your Business?</h2>
-              <p className="text-xl text-slate-300">Book your free 30-minute strategy call and discover how we can help you achieve unmatched growth</p>
-              <div className="mt-6 inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-6 py-2">
-                <Users className="h-5 w-5 text-cyan-400" />
-                <span className="text-cyan-400 font-medium">Ideal for businesses making $50,000+ monthly</span>
-              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">If your outreach isn't performing or you need someone to own the backend, let's talk.</h2>
+              <p className="text-xl text-slate-300 mt-4">Book a call and we'll tell you exactly what needs fixing.</p>
             </div>
 
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
@@ -374,30 +333,11 @@ function App() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors"
-                  placeholder="+1 (555) 000-0000"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Monthly Revenue</label>
-                <select className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors">
-                  <option>$50,000 - $100,000</option>
-                  <option>$100,000 - $250,000</option>
-                  <option>$250,000 - $500,000</option>
-                  <option>$500,000+</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Tell us about your business</label>
+                <label className="block text-sm font-medium mb-2">Tell us about your outreach</label>
                 <textarea
                   rows={4}
                   className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                  placeholder="What are your main goals and challenges?"
+                  placeholder="What are you currently running? What's not working?"
                 ></textarea>
               </div>
 
@@ -406,7 +346,7 @@ function App() {
                 className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-xl shadow-cyan-500/30 flex items-center justify-center space-x-2"
               >
                 <MessageSquare className="h-5 w-5" />
-                <span>Schedule Free Strategy Call</span>
+                <span>Book a Call</span>
               </button>
 
               <p className="text-center text-sm text-slate-400 mt-4">
@@ -425,11 +365,9 @@ function App() {
               <Zap className="h-6 w-6 text-cyan-400" />
               <span className="text-xl font-bold">Adverve</span>
             </div>
-
             <div className="text-slate-400 text-sm">
-              © 2024 Adverve Agency. All rights reserved.
+              © 2025 Adverve. All rights reserved.
             </div>
-
             <div className="flex space-x-6">
               <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors">Privacy</a>
               <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors">Terms</a>
@@ -439,7 +377,6 @@ function App() {
         </div>
       </footer>
 
-      {/* Chatbot */}
       <Chatbot />
     </div>
   );
