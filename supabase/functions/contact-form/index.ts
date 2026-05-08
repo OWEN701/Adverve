@@ -29,7 +29,7 @@ Deno.serve(async (req: Request) => {
 
     if (dbError) throw dbError;
 
-    const resendKey = Deno.env.get("RESEND_API_KEY");
+    const resendKey = Deno.env.get("Resend_API_Key");
     if (resendKey) {
       await fetch("https://api.resend.com/emails", {
         method: "POST",
