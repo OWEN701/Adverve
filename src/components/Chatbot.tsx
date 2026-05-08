@@ -48,21 +48,43 @@ export function Chatbot() {
   }, [isOpen]);
 
   const initializeChat = async () => {
-    const { data: conversation } = await supabase
+    const { data: conversation, error } = await supabase
       .from('chat_conversations')
       .insert({ session_id: sessionId })
       .select()
-      .single();
+      .maybeSingle();
 
-    if (conversation) {
-      setConversationId(conversation.id);
-      await addMessage('assistant', "Hi! I'm Adbot, Adverve's AI assistant. I'd love to learn more about your business and see how we can help you grow. What's your name?");
+    if (error || !conversation) {
+      // Still show greeting even if DB insert fails
+      const tempId = `conv_${Date.now()}`;
+      setConversationId(tempId);
+      const greeting = "Hi! I'm Adbot, Adverve's AI assistant. I'd love to learn more about your business and see how we can help you grow. What's your name?";
+      setMessages([{ id: `temp_${Date.now()}`, role: 'assistant', message: greeting, created_at: new Date().toISOString() }]);
+      return;
+    }
+
+    const convId = conversation.id;
+    setConversationId(convId);
+
+    const greeting = "Hi! I'm Adbot, Adverve's AI assistant. I'd love to learn more about your business and see how we can help you grow. What's your name?";
+    const tempMsg: Message = { id: `temp_${Date.now()}`, role: 'assistant', message: greeting, created_at: new Date().toISOString() };
+    setMessages([tempMsg]);
+
+    const { data: savedMsg } = await supabase
+      .from('chat_messages')
+      .insert({ conversation_id: convId, role: 'assistant', message: greeting })
+      .select()
+      .maybeSingle();
+
+    if (savedMsg) {
+      setMessages([savedMsg]);
     }
   };
 
-  const addMessage = async (role: 'user' | 'assistant', message: string) => {
+  const addMessage = async (role: 'user' | 'assistant', message: string, convId: string) => {
+    const tempId = `temp_${Date.now()}`;
     const newMessage: Message = {
-      id: `temp_${Date.now()}`,
+      id: tempId,
       role,
       message,
       created_at: new Date().toISOString(),
@@ -70,21 +92,15 @@ export function Chatbot() {
 
     setMessages((prev) => [...prev, newMessage]);
 
-    if (conversationId) {
+    if (convId && !convId.startsWith('conv_')) {
       const { data } = await supabase
         .from('chat_messages')
-        .insert({
-          conversation_id: conversationId,
-          role,
-          message,
-        })
+        .insert({ conversation_id: convId, role, message })
         .select()
-        .single();
+        .maybeSingle();
 
       if (data) {
-        setMessages((prev) =>
-          prev.map((msg) => (msg.id === newMessage.id ? data : msg))
-        );
+        setMessages((prev) => prev.map((msg) => (msg.id === tempId ? data : msg)));
       }
     }
   };
@@ -183,22 +199,23 @@ export function Chatbot() {
     if (!inputValue.trim() || isLoading || !conversationId) return;
 
     const userMessage = inputValue.trim();
+    const convId = conversationId;
     setInputValue('');
     setIsLoading(true);
 
-    await addMessage('user', userMessage);
+    await addMessage('user', userMessage, convId);
 
     setTimeout(async () => {
       const { response, nextStep, updateData } = getNextResponse(chatState.step, userMessage);
 
-      if (updateData) {
+      if (updateData && !convId.startsWith('conv_')) {
         await supabase
           .from('chat_conversations')
           .update(updateData)
-          .eq('id', conversationId);
+          .eq('id', convId);
       }
 
-      await addMessage('assistant', response);
+      await addMessage('assistant', response, convId);
       setChatState((prev) => ({ ...prev, step: nextStep }));
       setIsLoading(false);
     }, 1000);
