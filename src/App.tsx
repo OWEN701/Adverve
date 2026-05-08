@@ -60,6 +60,18 @@ const TESTIMONIALS = [
     initials: 'TB',
     gradient: 'from-blue-500 to-cyan-600',
   },
+  {
+    quote: 'Built me a high converting website for my appliance repair business, good communication and regular SEO and site updates made when necessary.',
+    name: 'James Smith',
+    initials: 'JS',
+    gradient: 'from-teal-500 to-cyan-600',
+  },
+  {
+    quote: 'Took my bakery website from 0 to hero, helped me add a shop and booking reservation on top of redesigning the whole site, highly recommend.',
+    name: 'Louise D',
+    initials: 'LD',
+    gradient: 'from-blue-600 to-blue-400',
+  },
 ];
 
 function App() {
