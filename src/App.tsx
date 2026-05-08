@@ -1,4 +1,4 @@
-import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, Globe, MapPin } from 'lucide-react';
+import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, Globe, MapPin, Monitor } from 'lucide-react';
 import { useState } from 'react';
 import { Chatbot } from './components/Chatbot';
 
@@ -36,6 +36,14 @@ const SERVICES = [
     title: 'CRM & Workflow Integration',
     description: 'GHL and other CRM setup and automation. We connect your outreach to your CRM so no lead falls through the cracks.',
     bullets: ['GoHighLevel (GHL) setup & automation', 'Lead routing & pipeline management', 'Cross-platform workflow automation'],
+  },
+  {
+    icon: <Monitor className="h-8 w-8 text-white" />,
+    gradient: 'from-slate-600 to-slate-500',
+    shadow: 'shadow-slate-600/50',
+    title: 'Website Design',
+    description: 'Clean, conversion-focused websites built and handed over ready to use.',
+    bullets: ['Purpose-built for B2B credibility', 'Fast turnaround, clean handover', 'Optimised for outreach landing pages'],
   },
 ];
 
@@ -180,7 +188,7 @@ function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 [&>*:last-child:nth-child(odd)]:md:col-span-2 [&>*:last-child:nth-child(odd)]:md:max-w-lg [&>*:last-child:nth-child(odd)]:md:mx-auto [&>*:last-child:nth-child(odd)]:md:w-full">
             {SERVICES.map((service) => (
               <div key={service.title} className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
                 <div className={`bg-gradient-to-br ${service.gradient} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
