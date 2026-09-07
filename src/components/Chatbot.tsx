@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
+import { MessageCircle, X, Send, Bot } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface Message {
@@ -30,7 +30,7 @@ export function Chatbot() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isLoading]);
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -153,70 +153,82 @@ export function Chatbot() {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Launcher Bubble */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full p-4 shadow-2xl shadow-cyan-500/50 transition-all duration-300 transform hover:scale-110 z-50 group"
+          className="fixed bottom-6 right-6 bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full p-4 shadow-lg shadow-cyan-500/30 transition-all duration-300 transform hover:scale-110 z-50 group"
           aria-label="Open chat"
         >
-          <MessageCircle className="h-6 w-6" />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+          <span className="chat-pulse-ring absolute inset-0 rounded-full bg-cyan-400/40" />
+          <MessageCircle className="h-6 w-6 relative z-10" />
+          <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] font-semibold rounded-full h-5 w-5 flex items-center justify-center shadow-md ring-2 ring-slate-900">
             1
           </span>
-          <span className="absolute bottom-full right-0 mb-2 bg-slate-900 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl">
+          <span className="absolute bottom-full right-0 mb-3 bg-slate-800 text-slate-100 text-sm px-3 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-xl border border-slate-700">
             Chat with us!
           </span>
         </button>
       )}
 
-      {/* Chat Window */}
+      {/* Chat Panel */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-[380px] h-[600px] bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 flex flex-col z-50 animate-in slide-in-from-bottom-4">
+        <div className="fixed bottom-0 right-0 left-0 sm:bottom-6 sm:right-6 sm:left-auto sm:w-[380px] h-[85vh] sm:h-[600px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-t-3xl sm:rounded-2xl shadow-2xl shadow-black/40 border border-slate-700 flex flex-col z-50 chat-panel-open overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-4 rounded-t-2xl flex items-center justify-between">
+          <div className="bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-                <MessageCircle className="h-5 w-5 text-white" />
+              <div className="bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full p-2 ring-2 ring-white/20 shadow-md">
+                <Bot className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-white">Adbot</h3>
-                <div className="flex items-center space-x-1">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-white/90">Online</span>
+                <h3 className="font-semibold text-white text-base leading-tight">Adbot</h3>
+                <div className="flex items-center space-x-1.5 mt-0.5">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-xs text-white/70">Online</span>
                 </div>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white transition-colors p-1 hover:bg-white/10 rounded-lg"
+              className="text-white/70 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
+              aria-label="Close chat"
             >
               <X className="h-5 w-5" />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/50 chat-scrollbar">
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex items-end space-x-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
+                {msg.role === 'assistant' && (
+                  <div className="flex-shrink-0 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full p-1.5 shadow-md mb-1">
+                    <Bot className="h-3.5 w-3.5 text-white" />
+                  </div>
+                )}
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                  className={`max-w-[80%] px-4 py-3 text-sm leading-relaxed whitespace-pre-line ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white'
-                      : 'bg-slate-800 text-slate-100'
+                      ? 'bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl rounded-br-md shadow-md'
+                      : 'bg-slate-700/80 text-slate-100 rounded-2xl rounded-bl-md'
                   }`}
                 >
-                  <p className="text-sm leading-relaxed whitespace-pre-line">{msg.message}</p>
+                  {msg.message}
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-slate-800 rounded-2xl px-4 py-3">
-                  <Loader2 className="h-5 w-5 text-cyan-400 animate-spin" />
+              <div className="flex items-end space-x-2 justify-start">
+                <div className="flex-shrink-0 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full p-1.5 shadow-md mb-1">
+                  <Bot className="h-3.5 w-3.5 text-white" />
+                </div>
+                <div className="bg-slate-700/80 rounded-2xl rounded-bl-md px-4 py-3.5 flex items-center space-x-1.5">
+                  <span className="chat-typing-dot w-2 h-2 bg-slate-300 rounded-full" />
+                  <span className="chat-typing-dot w-2 h-2 bg-slate-300 rounded-full" />
+                  <span className="chat-typing-dot w-2 h-2 bg-slate-300 rounded-full" />
                 </div>
               </div>
             )}
@@ -224,21 +236,22 @@ export function Chatbot() {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-slate-800 bg-slate-900 rounded-b-2xl">
-            <div className="flex space-x-2">
+          <div className="p-4 border-t border-slate-700/50 bg-slate-900/80 backdrop-blur-sm">
+            <div className="flex items-center space-x-3">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder-slate-400"
+                className="flex-1 bg-slate-800/90 border border-slate-700 rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all text-white placeholder-slate-500"
                 disabled={isLoading}
               />
               <button
                 onClick={handleSend}
                 disabled={!inputValue.trim() || isLoading}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:from-slate-700 disabled:to-slate-700 text-white rounded-xl px-4 py-3 transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed"
+                className="bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:from-slate-700 disabled:to-slate-700 text-white rounded-full p-3 transition-all duration-200 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed shadow-md shadow-cyan-500/20"
+                aria-label="Send message"
               >
                 <Send className="h-5 w-5" />
               </button>
