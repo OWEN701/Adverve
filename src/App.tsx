@@ -1,4 +1,4 @@
-import { Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor, User } from 'lucide-react';
+import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor, User } from 'lucide-react';
 import { useState } from 'react';
 import { Chatbot } from './components/Chatbot';
 
@@ -6,7 +6,7 @@ const TOOLS = ['Clay', 'Smartlead', 'HeyReach', 'ZoomInfo', 'GHL', 'Lemlist', 'L
 
 const SERVICES = [
   {
-    icon: <img src="/adverve-og-image_1.png" alt="" className="h-8 w-auto rounded" />,
+    icon: <Zap className="h-8 w-8 text-white" />,
     gradient: 'from-cyan-500 to-blue-600',
     shadow: 'shadow-cyan-500/50',
     title: 'Outreach System Builds',
@@ -180,7 +180,7 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-8">
-                <img src="/adverve-og-image_1.png" alt="" className="h-4 w-auto rounded" aria-hidden="true" />
+                <Zap className="h-4 w-4 text-cyan-400" aria-hidden="true" />
                 <span className="text-sm text-cyan-400 font-medium">B2B Outreach Infrastructure</span>
               </div>
 
