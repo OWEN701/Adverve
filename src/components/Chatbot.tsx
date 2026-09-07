@@ -9,14 +9,6 @@ interface Message {
   created_at: string;
 }
 
-interface ChatState {
-  step: 'greeting' | 'name' | 'email' | 'phone' | 'business' | 'conversation';
-  userName?: string;
-  userEmail?: string;
-  userPhone?: string;
-  businessInfo?: string;
-}
-
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -30,7 +22,6 @@ export function Chatbot() {
     localStorage.setItem('adverve_session_id', newId);
     return newId;
   });
-  const [chatState, setChatState] = useState<ChatState>({ step: 'greeting' });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -55,7 +46,6 @@ export function Chatbot() {
       .maybeSingle();
 
     if (error || !conversation) {
-      // Still show greeting even if DB insert fails
       const tempId = `conv_${Date.now()}`;
       setConversationId(tempId);
       const greeting = "Hi! I'm Adbot, Adverve's AI assistant. I'd love to learn more about your business and see how we can help you grow. What's your name?";
@@ -81,117 +71,28 @@ export function Chatbot() {
     }
   };
 
-  const addMessage = async (role: 'user' | 'assistant', message: string, convId: string) => {
-    const tempId = `temp_${Date.now()}`;
+  const addMessageToLocal = (role: 'user' | 'assistant', message: string): Message => {
+    const tempId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
     const newMessage: Message = {
       id: tempId,
       role,
       message,
       created_at: new Date().toISOString(),
     };
-
     setMessages((prev) => [...prev, newMessage]);
-
-    if (convId && !convId.startsWith('conv_')) {
-      const { data } = await supabase
-        .from('chat_messages')
-        .insert({ conversation_id: convId, role, message })
-        .select()
-        .maybeSingle();
-
-      if (data) {
-        setMessages((prev) => prev.map((msg) => (msg.id === tempId ? data : msg)));
-      }
-    }
+    return newMessage;
   };
 
-  const extractName = (input: string): string => {
-    const cleanInput = input.trim();
+  const persistMessage = async (role: 'user' | 'assistant', message: string, convId: string, tempId: string) => {
+    if (!convId || convId.startsWith('conv_')) return;
+    const { data } = await supabase
+      .from('chat_messages')
+      .insert({ conversation_id: convId, role, message })
+      .select()
+      .maybeSingle();
 
-    const namePatterns = [
-      /(?:my name is|i'm|im|i am|this is|call me)\s+([a-z]+)/i,
-      /^([a-z]+)$/i,
-      /^([a-z]+\s+[a-z]+)$/i,
-    ];
-
-    for (const pattern of namePatterns) {
-      const match = cleanInput.match(pattern);
-      if (match && match[1]) {
-        return match[1].trim();
-      }
-    }
-
-    return cleanInput;
-  };
-
-  const extractEmail = (input: string): string => {
-    const emailPattern = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/;
-    const match = input.match(emailPattern);
-    return match ? match[1] : input.trim();
-  };
-
-  const extractPhone = (input: string): string => {
-    const phonePattern = /([\d\s()+-]+)/;
-    const match = input.match(phonePattern);
-    if (match) {
-      return match[1].replace(/\s+/g, ' ').trim();
-    }
-    return input.trim();
-  };
-
-  const capitalizeWords = (str: string): string => {
-    return str.split(' ').map(word =>
-      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    ).join(' ');
-  };
-
-  const getNextResponse = (currentStep: string, userInput: string): { response: string; nextStep: ChatState['step']; updateData?: any } => {
-    switch (currentStep) {
-      case 'greeting': {
-        const extractedName = extractName(userInput);
-        const formattedName = capitalizeWords(extractedName);
-        return {
-          response: `Nice to meet you, ${formattedName}! What's the best email to reach you?`,
-          nextStep: 'email',
-          updateData: { visitor_name: formattedName },
-        };
-      }
-      case 'name': {
-        const extractedName = extractName(userInput);
-        const formattedName = capitalizeWords(extractedName);
-        return {
-          response: `Thanks, ${formattedName}! What's your email address?`,
-          nextStep: 'email',
-          updateData: { visitor_name: formattedName },
-        };
-      }
-      case 'email': {
-        const extractedEmail = extractEmail(userInput);
-        return {
-          response: `Perfect! And what's a good phone number to contact you?`,
-          nextStep: 'phone',
-          updateData: { visitor_email: extractedEmail },
-        };
-      }
-      case 'phone': {
-        const extractedPhone = extractPhone(userInput);
-        return {
-          response: `Great! Tell me a bit about your business and what challenges you're facing with marketing or lead generation.`,
-          nextStep: 'business',
-          updateData: { visitor_phone: extractedPhone },
-        };
-      }
-      case 'business':
-        return {
-          response: `Thanks for sharing! Based on what you've told me, I think our AI-powered lead generation and paid traffic solutions could be a perfect fit for you. We specialize in:\n\n• High-converting website creation with smart chatbots\n• AI-powered lead generation campaigns\n• Social media growth strategies\n\nWould you like to schedule a free 30-minute strategy call with our team to discuss how we can help you achieve 3-5x ROI growth?`,
-          nextStep: 'conversation',
-          updateData: { business_info: userInput, lead_qualified: true },
-        };
-      default:
-        return {
-          response: `That's a great question! Our team would love to discuss this with you in detail during a strategy call. In the meantime, feel free to explore our services on this page, or let me know if you have any other questions!`,
-          nextStep: 'conversation',
-        };
+    if (data) {
+      setMessages((prev) => prev.map((msg) => (msg.id === tempId ? data : msg)));
     }
   };
 
@@ -203,22 +104,44 @@ export function Chatbot() {
     setInputValue('');
     setIsLoading(true);
 
-    await addMessage('user', userMessage, convId);
+    const userMsg = addMessageToLocal('user', userMessage);
+    persistMessage('user', userMessage, convId, userMsg.id);
 
-    setTimeout(async () => {
-      const { response, nextStep, updateData } = getNextResponse(chatState.step, userMessage);
+    const apiMessages = [
+      ...messages.map((m) => ({ role: m.role, content: m.message })),
+      { role: 'user' as const, content: userMessage },
+    ];
 
-      if (updateData && !convId.startsWith('conv_')) {
-        await supabase
-          .from('chat_conversations')
-          .update(updateData)
-          .eq('id', convId);
-      }
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            conversationId: convId,
+            messages: apiMessages,
+          }),
+        }
+      );
 
-      await addMessage('assistant', response, convId);
-      setChatState((prev) => ({ ...prev, step: nextStep }));
+      if (!res.ok) throw new Error('Chat request failed');
+
+      const data = await res.json();
+      const reply = data.reply || "Sorry, I didn't catch that. Could you try again?";
+
+      const assistantMsg = addMessageToLocal('assistant', reply);
+      persistMessage('assistant', reply, convId, assistantMsg.id);
+    } catch {
+      const fallback = "Sorry, I had trouble connecting just now. Could you try again, or reach out via the contact form below?";
+      const assistantMsg = addMessageToLocal('assistant', fallback);
+      persistMessage('assistant', fallback, convId, assistantMsg.id);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

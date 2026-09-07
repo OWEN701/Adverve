@@ -1,0 +1,5 @@
+[functions.contact-form]
+verify_jwt = false
+
+[functions.chat]
+verify_jwt = false
