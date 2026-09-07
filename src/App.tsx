@@ -1,4 +1,4 @@
-import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor } from 'lucide-react';
+import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor, User } from 'lucide-react';
 import { useState } from 'react';
 import { Chatbot } from './components/Chatbot';
 
@@ -136,6 +136,7 @@ function App() {
             <div className="hidden md:flex space-x-8">
               <button onClick={() => scrollToSection('services')} className="hover:text-cyan-400 transition-colors">Services</button>
               <button onClick={() => scrollToSection('process')} className="hover:text-cyan-400 transition-colors">Process</button>
+              <button onClick={() => scrollToSection('about')} className="hover:text-cyan-400 transition-colors">About</button>
               <button onClick={() => scrollToSection('results')} className="hover:text-cyan-400 transition-colors">Results</button>
               <button onClick={() => scrollToSection('contact')} className="hover:text-cyan-400 transition-colors">Contact</button>
             </div>
@@ -164,6 +165,7 @@ function App() {
             <div className="px-4 py-6 space-y-4">
               <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Services</button>
               <button onClick={() => scrollToSection('process')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Process</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">About</button>
               <button onClick={() => scrollToSection('results')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Results</button>
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Contact</button>
               <button onClick={() => scrollToSection('contact')} className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 rounded-lg font-semibold mt-4">Book a Call</button>
@@ -321,6 +323,37 @@ function App() {
                   We own the backend. You focus on closing. Monthly reporting keeps you across results without the noise.
                 </p>
               </article>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" aria-labelledby="about-heading" className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 md:p-12 border border-slate-700 shadow-2xl">
+              <div className="flex items-center space-x-3 mb-8">
+                <div className="bg-gradient-to-br from-cyan-500 to-blue-600 w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <User className="h-7 w-7 text-white" aria-hidden="true" />
+                </div>
+                <h2 id="about-heading" className="text-3xl md:text-4xl font-bold">About the Founder</h2>
+              </div>
+
+              <div className="space-y-6">
+                <p className="text-slate-300 leading-relaxed text-lg">
+                  I started Adverve after spending years chasing the idea of becoming an entrepreneur without quite finding the right vehicle for it. The turning point was helping my aunt grow her coaching business to $1M in revenue in just 18 months &mdash; that's what showed me outreach infrastructure, done properly, is a genuine unlock for service businesses that have a good offer but no system behind it.
+                </p>
+                <p className="text-slate-300 leading-relaxed text-lg">
+                  From there I went deep on AI &mdash; spending a few months in Thailand going all-in on learning how to apply it to outreach, list building, and campaign automation. Since then I've built and run backend outreach systems for clients across the UK and North America, and expanded into website design for businesses that need both the traffic engine and the storefront to convert it.
+                </p>
+                <p className="text-slate-300 leading-relaxed text-lg">
+                  Adverve exists because most businesses don't need another marketing agency &mdash; they need someone who'll actually build and own the infrastructure.
+                </p>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-slate-700">
+                <div className="font-semibold text-white text-lg">Owen Cawston</div>
+                <div className="text-sm text-cyan-400 mt-1">Founder, Adverve</div>
+              </div>
             </div>
           </div>
         </section>
