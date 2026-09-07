@@ -1,4 +1,4 @@
-import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor, User } from 'lucide-react';
+import { Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor, User } from 'lucide-react';
 import { useState } from 'react';
 import { Chatbot } from './components/Chatbot';
 
@@ -6,7 +6,7 @@ const TOOLS = ['Clay', 'Smartlead', 'HeyReach', 'ZoomInfo', 'GHL', 'Lemlist', 'L
 
 const SERVICES = [
   {
-    icon: <Zap className="h-8 w-8 text-white" />,
+    icon: <img src="/adverve-og-image_1.png" alt="" className="h-8 w-auto rounded" />,
     gradient: 'from-cyan-500 to-blue-600',
     shadow: 'shadow-cyan-500/50',
     title: 'Outreach System Builds',
@@ -129,7 +129,7 @@ function App() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <Zap className="h-8 w-8 text-cyan-400" aria-hidden="true" />
+              <img src="/adverve-og-image_1.png" alt="Adverve" className="h-8 w-auto rounded" aria-hidden="true" />
               <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Adverve</span>
             </div>
 
@@ -180,7 +180,7 @@ function App() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-8">
-                <Zap className="h-4 w-4 text-cyan-400" aria-hidden="true" />
+                <img src="/adverve-og-image_1.png" alt="" className="h-4 w-auto rounded" aria-hidden="true" />
                 <span className="text-sm text-cyan-400 font-medium">B2B Outreach Infrastructure</span>
               </div>
 
@@ -506,7 +506,7 @@ function App() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <Zap className="h-6 w-6 text-cyan-400" aria-hidden="true" />
+              <img src="/adverve-og-image_1.png" alt="Adverve" className="h-6 w-auto rounded" aria-hidden="true" />
               <span className="text-xl font-bold">Adverve</span>
             </div>
             <div className="text-slate-400 text-sm">
