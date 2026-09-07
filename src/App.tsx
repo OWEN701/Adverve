@@ -1,8 +1,13 @@
-import { Zap, Database, CheckCircle, ArrowRight, Menu, X, MessageSquare, Settings, BarChart2, MapPin, Monitor, User } from 'lucide-react';
+import { Zap, Database, CheckCircle, ArrowRight, Menu, X, Settings, BarChart2, MapPin, Monitor, User, Layers, Send, Linkedin, Radar, Workflow, Mail, Compass, Rocket, Search, Wrench, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import { Chatbot } from './components/Chatbot';
-
-const TOOLS = ['Clay', 'Smartlead', 'HeyReach', 'ZoomInfo', 'GHL', 'Lemlist', 'LinkedIn Sales Navigator', 'B2B Rocket'];
+import { DarkGradientBg } from './components/ui/elegant-dark-pattern';
+import IntroOverlay from './components/ui/intro-overlay';
+import { ShinyButton } from './components/ui/shiny-button';
+import ShaderCard from './components/ui/shader-card';
+import { FeatureGrid, type FeatureType } from './components/ui/grid-feature-cards';
+import { Testimonials } from './components/ui/unique-testimonial';
+import { LetsWorkTogether } from './components/ui/lets-work-section';
 
 const SERVICES = [
   {
@@ -47,6 +52,35 @@ const SERVICES = [
   },
 ];
 
+const TOOL_FEATURES: FeatureType[] = [
+  { title: 'Clay', icon: Layers, description: 'Waterfall data enrichment and list building.' },
+  { title: 'Smartlead', icon: Send, description: 'Cold email sending, inbox rotation and warm-up.' },
+  { title: 'HeyReach', icon: Linkedin, description: 'LinkedIn outreach automation at scale.' },
+  { title: 'ZoomInfo', icon: Radar, description: 'B2B contact data and buying-intent signals.' },
+  { title: 'GoHighLevel', icon: Workflow, description: 'CRM, pipelines and follow-up automation.' },
+  { title: 'Lemlist', icon: Mail, description: 'Multichannel sequences and email personalisation.' },
+  { title: 'Sales Navigator', icon: Compass, description: 'Advanced prospecting and lead filtering.' },
+  { title: 'B2B Rocket', icon: Rocket, description: 'AI-driven lead generation and qualification.' },
+];
+
+const PROCESS_STEPS: FeatureType[] = [
+  {
+    title: '01 — Discovery Call',
+    icon: Search,
+    description: 'We learn your ICP, current setup and goals, then tell you exactly what needs building and what needs fixing.',
+  },
+  {
+    title: '02 — System Build',
+    icon: Wrench,
+    description: 'We build the full outreach stack — lists, sequences, tooling, CRM — and get everything live and delivering.',
+  },
+  {
+    title: '03 — Managed & Optimised',
+    icon: TrendingUp,
+    description: 'We own the backend. You focus on closing. Monthly reporting keeps you across results without the noise.',
+  },
+];
+
 const TESTIMONIALS = [
   {
     quote: 'Had our systems running within a week, supporting outreach across 9 clients simultaneously.',
@@ -78,8 +112,6 @@ const TESTIMONIALS = [
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', company: '', message: '' });
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -89,36 +121,11 @@ function App() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('submitting');
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-form`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
-            name: `${formData.firstName} ${formData.lastName}`.trim(),
-            email: formData.email,
-            company: formData.company,
-            message: formData.message,
-          }),
-        }
-      );
-      if (!res.ok) throw new Error('Submission failed');
-      setFormStatus('success');
-      setFormData({ firstName: '', lastName: '', email: '', company: '', message: '' });
-    } catch {
-      setFormStatus('error');
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+    <div className="min-h-screen text-white">
+      <DarkGradientBg />
+      <IntroOverlay />
+
       {/* Skip to content link for accessibility */}
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-cyan-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
         Skip to content
@@ -141,12 +148,13 @@ function App() {
               <button onClick={() => scrollToSection('contact')} className="hover:text-cyan-400 transition-colors">Contact</button>
             </div>
 
-            <button
+            <ShinyButton
+              size="sm"
               onClick={() => scrollToSection('contact')}
-              className="hidden md:block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg shadow-cyan-500/30"
+              className="hidden md:block"
             >
               Book a Call
-            </button>
+            </ShinyButton>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -168,7 +176,7 @@ function App() {
               <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">About</button>
               <button onClick={() => scrollToSection('results')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Results</button>
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 hover:text-cyan-400 transition-colors">Contact</button>
-              <button onClick={() => scrollToSection('contact')} className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 rounded-lg font-semibold mt-4">Book a Call</button>
+              <ShinyButton size="sm" onClick={() => scrollToSection('contact')} className="w-full mt-4">Book a Call</ShinyButton>
             </div>
           </div>
         )}
@@ -176,7 +184,7 @@ function App() {
 
       <main id="main-content">
         {/* Hero Section */}
-        <section aria-labelledby="hero-heading" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <section id="hero" aria-labelledby="hero-heading" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-4xl mx-auto">
               <div className="inline-flex items-center space-x-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-8">
@@ -196,13 +204,10 @@ function App() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl shadow-cyan-500/30 flex items-center space-x-2"
-                >
-                  <span>Book a Discovery Call</span>
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                </button>
+                <ShinyButton onClick={() => scrollToSection('contact')}>
+                  Book a Discovery Call
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </ShinyButton>
                 <button
                   onClick={() => scrollToSection('services')}
                   className="px-8 py-4 rounded-xl font-semibold text-lg border-2 border-slate-700 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300"
@@ -244,8 +249,8 @@ function App() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 [&>*:last-child:nth-child(odd)]:md:col-span-2 [&>*:last-child:nth-child(odd)]:md:max-w-lg [&>*:last-child:nth-child(odd)]:md:mx-auto [&>*:last-child:nth-child(odd)]:md:w-full">
-              {SERVICES.map((service) => (
-                <article key={service.title} className="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 hover:-translate-y-2">
+              {SERVICES.map((service, i) => (
+                <ShaderCard key={service.title} index={i} className="h-full">
                   <div className={`bg-gradient-to-br ${service.gradient} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                     {service.icon}
                   </div>
@@ -259,7 +264,7 @@ function App() {
                       </li>
                     ))}
                   </ul>
-                </article>
+                </ShaderCard>
               ))}
             </div>
           </div>
@@ -267,63 +272,23 @@ function App() {
 
         {/* Our Stack Section */}
         <section id="stack" aria-labelledby="stack-heading" className="py-20 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 id="stack-heading" className="text-4xl md:text-5xl font-bold mb-4">Our Stack</h2>
-            <p className="text-xl text-slate-400 mb-12">The tools serious outreach teams rely on.</p>
-            <ul className="flex flex-wrap justify-center gap-4" aria-label="Tools we use">
-              {TOOLS.map((tool) => (
-                <li
-                  key={tool}
-                  className="bg-slate-800 border border-slate-700 hover:border-cyan-500 hover:bg-slate-750 transition-all duration-200 rounded-xl px-6 py-3 text-slate-200 font-medium text-sm tracking-wide"
-                >
-                  {tool}
-                </li>
-              ))}
-            </ul>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 id="stack-heading" className="text-4xl md:text-5xl font-bold mb-4">Our Stack</h2>
+              <p className="text-xl text-slate-400">The tools serious outreach teams rely on.</p>
+            </div>
+            <FeatureGrid features={TOOL_FEATURES} />
           </div>
         </section>
 
         {/* Process Section */}
         <section id="process" aria-labelledby="process-heading" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
               <h2 id="process-heading" className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
-              <p className="text-xl text-slate-300 max-w-2xl mx-auto">From zero to booked meetings — a clear, proven process</p>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto">From zero to booked meetings — a clear, proven process.</p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-8 relative">
-              <div className="hidden md:block absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-400 opacity-30" style={{ width: 'calc(100% - 12rem)', left: '6rem' }}></div>
-
-              <article className="relative text-center">
-                <div className="bg-gradient-to-br from-cyan-500 to-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-cyan-500/50 relative z-10">
-                  <span className="text-3xl font-bold">1</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Discovery Call</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  We learn your ICP, current setup, and goals. Then we tell you exactly what needs building and what needs fixing.
-                </p>
-              </article>
-
-              <article className="relative text-center">
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/50 relative z-10">
-                  <span className="text-3xl font-bold">2</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">System Build</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  We build the full outreach stack — lists, sequences, tooling, CRM — and get everything live and delivering.
-                </p>
-              </article>
-
-              <article className="relative text-center">
-                <div className="bg-gradient-to-br from-blue-600 to-cyan-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/50 relative z-10">
-                  <span className="text-3xl font-bold">3</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Managed &amp; Optimised</h3>
-                <p className="text-slate-300 leading-relaxed">
-                  We own the backend. You focus on closing. Monthly reporting keeps you across results without the noise.
-                </p>
-              </article>
-            </div>
+            <FeatureGrid features={PROCESS_STEPS} />
           </div>
         </section>
 
@@ -359,146 +324,23 @@ function App() {
         </section>
 
         {/* Testimonials Section */}
-        <section id="results" aria-labelledby="results-heading" className="py-20 px-4 sm:px-6 lg:px-8">
+        <section id="results" aria-labelledby="results-heading" className="pt-20 pb-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 id="results-heading" className="text-4xl md:text-5xl font-bold mb-4">What Clients Say</h2>
+            <div className="text-center">
+              <h2 id="results-heading" className="text-4xl md:text-5xl font-bold">What Clients Say</h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {TESTIMONIALS.map((t) => (
-                <article key={t.name} className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300">
-                  <div className="flex items-center space-x-1 mb-6" aria-label="Rated 5 out of 5 stars">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg" aria-hidden="true">★</span>
-                    ))}
-                  </div>
-                  <blockquote className="text-slate-200 mb-8 leading-relaxed text-lg italic">
-                    "{t.quote}"
-                  </blockquote>
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold flex-shrink-0`} aria-hidden="true">
-                      {t.initials}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white">{t.name}</div>
-                      {t.role && <div className="text-xs text-slate-400 mt-0.5">{t.role}</div>}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <Testimonials testimonials={TESTIMONIALS} />
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" aria-labelledby="contact-heading" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 md:p-12 border border-slate-700 shadow-2xl">
-              <div className="text-center mb-10">
-                <h2 id="contact-heading" className="text-4xl md:text-5xl font-bold mb-4">If your outreach isn't performing or you need someone to own the backend, let's talk.</h2>
-                <p className="text-xl text-slate-300 mt-4">Book a call and we'll tell you exactly what needs fixing.</p>
-              </div>
-
-              {formStatus === 'success' ? (
-                <div className="text-center py-12" role="status" aria-live="polite">
-                  <CheckCircle className="h-16 w-16 text-cyan-400 mx-auto mb-4" aria-hidden="true" />
-                  <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                  <p className="text-slate-300">Thanks for reaching out. We'll be in touch within 24 hours.</p>
-                  <button
-                    onClick={() => setFormStatus('idle')}
-                    className="mt-6 text-cyan-400 hover:text-cyan-300 text-sm underline underline-offset-2"
-                  >
-                    Send another message
-                  </button>
-                </div>
-              ) : (
-                <form className="space-y-6" onSubmit={handleSubmit} aria-label="Contact form">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="firstName" className="block text-sm font-medium mb-2">First Name</label>
-                      <input
-                        id="firstName"
-                        type="text"
-                        required
-                        value={formData.firstName}
-                        onChange={(e) => setFormData(p => ({ ...p, firstName: e.target.value }))}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors"
-                        placeholder="John"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="lastName" className="block text-sm font-medium mb-2">Last Name</label>
-                      <input
-                        id="lastName"
-                        type="text"
-                        value={formData.lastName}
-                        onChange={(e) => setFormData(p => ({ ...p, lastName: e.target.value }))}
-                        className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors"
-                        placeholder="Doe"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">Email Address</label>
-                    <input
-                      id="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData(p => ({ ...p, email: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors"
-                      placeholder="john@company.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium mb-2">Company</label>
-                    <input
-                      id="company"
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData(p => ({ ...p, company: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors"
-                      placeholder="Acme Inc."
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">Tell us about your outreach</label>
-                    <textarea
-                      id="message"
-                      rows={4}
-                      required
-                      value={formData.message}
-                      onChange={(e) => setFormData(p => ({ ...p, message: e.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                      placeholder="What are you currently running? What's not working?"
-                    />
-                  </div>
-
-                  {formStatus === 'error' && (
-                    <p className="text-red-400 text-sm text-center" role="alert">Something went wrong. Please try again.</p>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={formStatus === 'submitting'}
-                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-60 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-xl shadow-cyan-500/30 flex items-center justify-center space-x-2"
-                  >
-                    <MessageSquare className="h-5 w-5" aria-hidden="true" />
-                    <span>{formStatus === 'submitting' ? 'Sending...' : 'Book a Call'}</span>
-                  </button>
-
-                  <p className="text-center text-sm text-slate-400 mt-4">
-                    No commitment required • 100% confidential • Response within 24 hours
-                  </p>
-                </form>
-              )}
-            </div>
-          </div>
-        </section>
+        {/* Contact Section — was a Supabase-backed form (kept in components/ContactForm.tsx) */}
+        <div id="contact" className="bg-slate-900/50">
+          <LetsWorkTogether
+            bookingUrl="https://app.lemcal.com/@owenc/adverve"
+            email="owen@adverve.io"
+          />
+        </div>
       </main>
 
       {/* Footer */}
