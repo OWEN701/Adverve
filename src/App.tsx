@@ -63,12 +63,14 @@ const TESTIMONIALS = [
   {
     quote: 'Built me a high converting website for my appliance repair business, good communication and regular SEO and site updates made when necessary.',
     name: 'James Smith',
+    role: 'Website Design client',
     initials: 'JS',
     gradient: 'from-teal-500 to-cyan-600',
   },
   {
     quote: 'Took my bakery website from 0 to hero, helped me add a shop and booking reservation on top of redesigning the whole site, highly recommend.',
     name: 'Louise D',
+    role: 'Website Design client',
     initials: 'LD',
     gradient: 'from-blue-600 to-blue-400',
   },
@@ -345,7 +347,10 @@ function App() {
                     <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold flex-shrink-0`} aria-hidden="true">
                       {t.initials}
                     </div>
-                    <div className="font-semibold text-white">{t.name}</div>
+                    <div>
+                      <div className="font-semibold text-white">{t.name}</div>
+                      {t.role && <div className="text-xs text-slate-400 mt-0.5">{t.role}</div>}
+                    </div>
                   </div>
                 </article>
               ))}
