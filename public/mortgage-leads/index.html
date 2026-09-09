@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3 Places Mortgage Leads Go Cold — Adverve</title>
+<meta name="description" content="The three points where mortgage leads go cold — the first 5 minutes, after attempt 2 or 3, and outside business hours — and what the data says about fixing each one.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.adverve.io/mortgage-leads/">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.adverve.io/mortgage-leads/">
+<meta property="og:title" content="3 Places Mortgage Leads Go Cold">
+<meta property="og:description" content="The first 5 minutes, after attempt 2 or 3, and outside business hours — and what the data says about fixing each one.">
+<meta property="og:site_name" content="Adverve">
+<meta property="og:image" content="https://www.adverve.io/adverve-og-image_1.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3 Places Mortgage Leads Go Cold">
+<meta name="twitter:description" content="The first 5 minutes, after attempt 2 or 3, and outside business hours — and what the data says about fixing each one.">
+<meta name="twitter:image" content="https://www.adverve.io/adverve-og-image_1.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-deep: #020617;
+    --ink: #f1f5f9;
+    --text: #cbd5e1;
+    --muted: #94a3b8;
+    --faint: #64748b;
+    --accent: #22d3ee;
+    --line: #1e293b;
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: #67e8f9; }
+
+  .sheet {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(32px, 6vw, 64px) clamp(20px, 5vw, 60px) clamp(40px, 7vw, 72px);
+    background: var(--bg);
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .glow {
+    position: absolute;
+    top: -180px;
+    right: -160px;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,211,238,0.16), rgba(34,211,238,0) 70%);
+    pointer-events: none;
+  }
+
+  .masthead {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .masthead svg { width: 30px; height: 30px; display: block; flex: none; }
+  .masthead .brand {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .masthead .rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(34,211,238,0.45), rgba(34,211,238,0));
+  }
+  .masthead .kicker {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  h1 {
+    position: relative;
+    margin: clamp(28px, 5vw, 40px) 0 0;
+    font-size: clamp(30px, 7vw, 40px);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+
+  .dek {
+    position: relative;
+    margin: 14px 0 0;
+    font-size: clamp(14px, 3.4vw, 16px);
+    line-height: 1.5;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .points {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(22px, 4vw, 28px);
+    margin-top: clamp(30px, 5vw, 42px);
+  }
+
+  .point {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 4px 18px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .point .num {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .point .body { display: flex; flex-direction: column; gap: 9px; }
+
+  .point h2 {
+    margin: 0;
+    font-size: clamp(17px, 4vw, 19px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .point .stat {
+    margin: 0;
+    font-size: clamp(14px, 3.6vw, 15px);
+    line-height: 1.45;
+    font-weight: 500;
+    color: #e2e8f0;
+  }
+  .point .detail {
+    margin: 0;
+    font-size: clamp(13px, 3.4vw, 13.5px);
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .point .source {
+    margin: 2px 0 0;
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: var(--faint);
+  }
+
+  .colophon {
+    position: relative;
+    margin-top: clamp(32px, 6vw, 48px);
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 20px;
+  }
+  .colophon p {
+    margin: 0;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+  .colophon a {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .cta {
+    position: relative;
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 18px;
+  }
+  .cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: background-color .15s ease;
+  }
+  .cta .btn:hover { background: rgba(34,211,238,0.12); color: var(--accent); }
+  .cta .note {
+    font-size: 12px;
+    color: var(--muted);
+    max-width: 40ch;
+  }
+
+  @media print {
+    body { background: #fff; color: #1e293b; }
+    .sheet { background: #fff; box-shadow: none; max-width: none; }
+    .glow, .cta { display: none; }
+    h1, .point h2, .point .stat { color: #0f172a; }
+    .dek, .point .num, .colophon a { color: #0e7490; }
+    .point .detail { color: #475569; }
+    a { color: #0e7490; }
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <div class="glow"></div>
+
+  <header class="masthead">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <rect width="32" height="32" rx="7" fill="#0f172a"/>
+      <path d="M16 6 L24 24 L20 24 L18.5 20 L13.5 20 L12 24 L8 24 Z" fill="#22d3ee"/>
+      <circle cx="16" cy="14.5" r="2.5" fill="#0f172a"/>
+    </svg>
+    <span class="brand">Adverve</span>
+    <span class="rule"></span>
+    <span class="kicker">Lead response brief</span>
+  </header>
+
+  <h1>3 Places Mortgage Leads Go Cold</h1>
+  <p class="dek">(and what the data actually says about fixing each one)</p>
+
+  <div class="points">
+
+    <section class="point">
+      <div class="num">01</div>
+      <div class="body">
+        <h2>The first 5 minutes</h2>
+        <p class="stat">Leads contacted within 5 minutes convert 21x more often than leads contacted after 30 minutes.</p>
+        <p class="detail">78% of borrowers go with whoever responds first — not whoever offers the best rate. Speed decides who gets the conversation before the pitch even starts. For most brokerages this size, the gap isn't skill or rate competitiveness — it's simply who picks up the phone first.</p>
+        <p class="source">Source: Harvard Business Review, &ldquo;The Short Life of Online Sales Leads&rdquo; (2011); Velocify mortgage lead response research.</p>
+      </div>
+    </section>
+
+    <section class="point">
+      <div class="num">02</div>
+      <div class="body">
+        <h2>After attempt 2 or 3</h2>
+        <p class="stat">Most loan officers stop following up after 2–3 touches. Real conversion takes 6–12 touches over 30 days.</p>
+        <p class="detail">Leads marked &ldquo;dead&rdquo; at attempt three routinely convert on attempt five or six — for a competitor who kept going. This isn't a motivation problem, it's a structural one: whoever's fielding leads is also underwriting files and coordinating closings, and follow-up is the first thing that slips.</p>
+        <p class="source">Source: Shape Software lead follow-up data; industry follow-up cadence research (2026).</p>
+      </div>
+    </section>
+
+    <section class="point">
+      <div class="num">03</div>
+      <div class="body">
+        <h2>Outside business hours</h2>
+        <p class="stat">Over 60% of inquiries land evenings or weekends — when no one's there to catch them.</p>
+        <p class="detail">By the time the office reopens Monday morning, the borrower has often already spoken to another lender. For a shop running two after-hours leads a week, that's over 100 leads a year going stale before anyone even sees them.</p>
+        <p class="source">Source: Real estate/mortgage lead response benchmarking, 2026 industry data.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="cta">
+    <a class="btn" href="https://app.lemcal.com/@owenc/adverve" target="_blank" rel="noopener">Book a 15-minute call</a>
+    <span class="note">We build the outbound and AI-powered follow-up systems that close these three gaps.</span>
+  </div>
+
+  <footer class="colophon">
+    <p>Prepared by Adverve — B2B outbound infrastructure &amp; AI-powered follow-up systems.</p>
+    <a href="https://www.adverve.io/" target="_blank" rel="noopener">adverve.io</a>
+  </footer>
+</main>
+</body>
+</html>
