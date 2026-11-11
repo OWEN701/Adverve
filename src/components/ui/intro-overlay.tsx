@@ -5,7 +5,7 @@ import PathDrawingPortfolioHero from "./path-drawing-portfolio-hero";
 
 const SEEN_KEY = "adverve-intro-seen";
 /** How long the drawn name holds before it starts fading out */
-const HOLD_MS = 3200;
+const HOLD_MS = 1500;
 /** Fade-out duration */
 const FADE_MS = 700;
 
@@ -27,18 +27,33 @@ function prefersReducedMotion(): boolean {
   }
 }
 
+/** Visitors arriving from a campaign link (cold email, ads) go straight to the page */
+function isCampaignTraffic(): boolean {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return ["utm_source", "utm_medium", "utm_campaign", "gclid", "fbclid", "li_fat_id"].some((k) =>
+      params.has(k),
+    );
+  } catch {
+    return false;
+  }
+}
+
+function shouldSkip(): boolean {
+  return alreadySeen() || prefersReducedMotion() || isCampaignTraffic();
+}
+
 /**
  * Full-screen path-drawn "Adverve" shown once per browser session on first
  * load, then it fades to reveal the site. A refresh in the same session skips
- * it; a new session (or reduced-motion) shows the site immediately.
+ * it; a new session, reduced-motion or a campaign link shows the site
+ * immediately. Any click, key, scroll or touch dismisses it early.
  */
 export default function IntroOverlay() {
-  const [phase, setPhase] = useState<Phase>(() =>
-    alreadySeen() || prefersReducedMotion() ? "done" : "play",
-  );
+  const [phase, setPhase] = useState<Phase>(() => (shouldSkip() ? "done" : "play"));
 
   useEffect(() => {
-    if (alreadySeen() || prefersReducedMotion()) {
+    if (shouldSkip()) {
       setPhase("done");
       return;
     }
@@ -59,9 +74,19 @@ export default function IntroOverlay() {
       document.body.style.overflow = "";
     }, HOLD_MS + FADE_MS);
 
+    const skip = () => {
+      clearTimeout(toFade);
+      clearTimeout(toDone);
+      setPhase("done");
+      document.body.style.overflow = "";
+    };
+    const skipEvents = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
+    skipEvents.forEach((e) => window.addEventListener(e, skip, { once: true, passive: true }));
+
     return () => {
       clearTimeout(toFade);
       clearTimeout(toDone);
+      skipEvents.forEach((e) => window.removeEventListener(e, skip));
       document.body.style.overflow = "";
     };
   }, []);
@@ -83,6 +108,8 @@ export default function IntroOverlay() {
         fromColor="#22d3ee"
         toColor="#3b82f6"
         showScrollCue={false}
+        drawDurationSec={1.1}
+        loopDraw={false}
       />
     </div>
   );

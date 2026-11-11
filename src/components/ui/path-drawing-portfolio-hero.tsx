@@ -274,6 +274,10 @@ export type PathDrawingPortfolioHeroProps = {
   scrollHref?: string;
   /** Show the animated "scroll" cue at the bottom (default true) */
   showScrollCue?: boolean;
+  /** Seconds to draw the name once (default 5.5) */
+  drawDurationSec?: number;
+  /** Redraw the name forever (default true); false holds the finished name */
+  loopDraw?: boolean;
   className?: string;
 };
 
@@ -290,6 +294,8 @@ export default function PathDrawingPortfolioHero({
   children,
   scrollHref = "#works",
   showScrollCue = true,
+  drawDurationSec = 5.5,
+  loopDraw = true,
   className,
 }: PathDrawingPortfolioHeroProps) {
   const name = brand.trim();
@@ -341,8 +347,8 @@ export default function PathDrawingPortfolioHero({
             viewBoxWidth={name.length > 8 ? 1100 : 860}
             viewBoxHeight={name.length > 8 ? 200 : 240}
             strokeWidth={2.4}
-            durationSec={5.5}
-            loop
+            durationSec={drawDurationSec}
+            loop={loopDraw}
           />
         </motion.div>
 
