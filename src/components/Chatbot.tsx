@@ -136,7 +136,7 @@ export function Chatbot() {
       const assistantMsg = addMessageToLocal('assistant', reply);
       persistMessage('assistant', reply, convId, assistantMsg.id);
     } catch {
-      const fallback = "Sorry, I had trouble connecting just now. Could you try again, or reach out via the contact form below?";
+      const fallback = "Sorry, I had trouble connecting just now. Could you try again, or book a call in the section below, or email owen@adverve.io?";
       const assistantMsg = addMessageToLocal('assistant', fallback);
       persistMessage('assistant', fallback, convId, assistantMsg.id);
     } finally {

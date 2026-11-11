@@ -1,21 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1319Y1XCF9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-1319Y1XCF9');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Google Analytics (GA4) with Consent Mode v2: nothing is stored until the
+         visitor accepts in the cookie banner (src/components/CookieConsent.tsx). -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-1319Y1XCF9');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1319Y1XCF9"></script>
+
     <!-- Primary Meta Tags -->
-    <title>Adverve | B2B Outreach Infrastructure That Books Meetings</title>
-    <meta name="title" content="Adverve | B2B Outreach Infrastructure That Books Meetings" />
-    <meta name="description" content="Adverve designs, builds, and manages the backend systems behind high-performance B2B outreach campaigns. Outreach system builds, campaign management, list building, and CRM integration." />
-    <meta name="keywords" content="B2B outreach, cold email infrastructure, outreach system build, campaign management, list building, data enrichment, Clay, Smartlead, HeyReach, ZoomInfo, GHL, GoHighLevel, Lemlist, LinkedIn Sales Navigator, B2B Rocket, CRM integration, lead generation" />
+    <title>Adverve | B2B Cold Outreach Systems, Built and Run For You</title>
+    <meta name="title" content="Adverve | B2B Cold Outreach Systems, Built and Run For You" />
+    <meta name="description" content="Adverve builds and runs cold email and LinkedIn outreach systems for B2B founders in the UK and North America. Live in about a week, and you own everything we build." />
     <meta name="author" content="Adverve" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="theme-color" content="#0f172a" />
@@ -24,37 +32,70 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.adverve.io/" />
-    <meta property="og:title" content="Adverve | B2B Outreach Infrastructure That Books Meetings" />
-    <meta property="og:description" content="Not another marketing agency. We design, build and manage the backend systems behind high-performance B2B outreach campaigns." />
+    <meta property="og:title" content="Adverve | B2B Cold Outreach Systems, Built and Run For You" />
+    <meta property="og:description" content="Domains, lists, sequences and CRM — set up in about a week and run for you. Built in your accounts, so you own all of it." />
     <meta property="og:site_name" content="Adverve" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content="https://www.adverve.io/adverve-og-image_1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Adverve logo" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Adverve | B2B Outreach Infrastructure That Books Meetings" />
-    <meta name="twitter:description" content="Not another marketing agency. We design, build and manage the backend systems behind high-performance B2B outreach campaigns." />
+    <meta name="twitter:title" content="Adverve | B2B Cold Outreach Systems, Built and Run For You" />
+    <meta name="twitter:description" content="Domains, lists, sequences and CRM — set up in about a week and run for you. Built in your accounts, so you own all of it." />
+    <meta name="twitter:image" content="https://www.adverve.io/adverve-og-image_1.png" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Fonts -->
+    <!-- Fonts (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
 
-    <!-- Structured Data: Organization -->
+    <!-- Structured Data: Organization / ProfessionalService -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "ProfessionalService",
+      "@id": "https://www.adverve.io/#org",
       "name": "Adverve",
       "url": "https://www.adverve.io/",
+      "logo": "https://www.adverve.io/icon-512.png",
+      "image": "https://www.adverve.io/adverve-og-image_1.png",
+      "email": "owen@adverve.io",
       "sameAs": ["https://www.linkedin.com/company/advervee/"],
-      "description": "B2B outreach infrastructure: system builds, campaign management, list building, data enrichment, and CRM integration.",
-      "areaServed": ["United Kingdom", "North America"],
-      "knowsAbout": ["B2B outreach", "cold email infrastructure", "campaign management", "list building", "data enrichment", "CRM integration"]
+      "description": "B2B outreach infrastructure: cold email and LinkedIn outreach system builds, campaign management, list building, data enrichment, and CRM integration.",
+      "areaServed": ["United Kingdom", "United States", "Canada"],
+      "priceRange": "£750 – £2,500+",
+      "founder": { "@id": "https://www.adverve.io/#owen" },
+      "knowsAbout": ["B2B outreach", "cold email infrastructure", "email deliverability", "campaign management", "list building", "data enrichment", "Clay", "CRM integration", "GoHighLevel"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Outreach packages",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Outbound Launch", "description": "Full outreach system build, live in about a week." },
+            "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2500, "priceCurrency": "GBP" }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Managed Outbound", "description": "Ongoing campaign management, reply handling and weekly reporting." },
+            "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": 1500, "priceCurrency": "GBP", "unitText": "MONTH" }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Data Sprint", "description": "Targeted, Clay-enriched, verified prospect list." },
+            "priceSpecification": { "@type": "PriceSpecification", "minPrice": 750, "priceCurrency": "GBP" }
+          }
+        ]
+      }
     }
     </script>
 
@@ -63,13 +104,11 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": "https://www.adverve.io/#owen",
       "name": "Owen Cawston",
       "jobTitle": "Founder",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Adverve",
-        "url": "https://www.adverve.io/"
-      }
+      "image": "https://www.adverve.io/owen-cawston.jpg",
+      "worksFor": { "@id": "https://www.adverve.io/#org" }
     }
     </script>
 
@@ -82,9 +121,24 @@
       "url": "https://www.adverve.io/"
     }
     </script>
-  <meta property="og:image" content="/adverve-og-image_1.png">
-    <meta name="twitter:image" content="/adverve-og-image_1.png">
-</head>
+
+    <!-- Structured Data: FAQ (keep in sync with src/content/faqs.ts) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How quickly will our outreach be live?", "acceptedAnswer": { "@type": "Answer", "text": "Usually about a week from kickoff to the first campaign going out. New sending inboxes are warmed up first, so volume ramps up over the following weeks rather than starting at full speed." } },
+        { "@type": "Question", "name": "Who owns the domains, inboxes and data?", "acceptedAnswer": { "@type": "Answer", "text": "You do. Everything is set up in your own accounts — sending domains, inboxes, lists, sequences and CRM workflows. If we stop working together, you keep all of it." } },
+        { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "A full outreach system build starts from £2,500 as a one-off. Ongoing campaign management starts from £1,500 a month, and a standalone list-building and enrichment project starts from £750. Exact pricing depends on volume and channels, and we confirm it on the call." } },
+        { "@type": "Question", "name": "Will cold email hurt our main domain?", "acceptedAnswer": { "@type": "Answer", "text": "No. Campaigns send from separate secondary domains with SPF, DKIM and DMARC set up and inboxes warmed before anything goes out, so your main domain’s reputation stays protected." } },
+        { "@type": "Question", "name": "What do you need from us?", "acceptedAnswer": { "@type": "Answer", "text": "A clear offer, a short kickoff on who your ideal customer is, and access to your CRM — or we set one up for you in GoHighLevel. We handle the lists, copy, tooling and sending." } },
+        { "@type": "Question", "name": "Why not hire an SDR or do it in-house?", "acceptedAnswer": { "@type": "Answer", "text": "An SDR still needs the data, tooling, deliverability setup and CRM behind them, and takes months to ramp. We build that system and run it for less than the cost of a hire — and if you do bring outreach in-house later, the whole system is already yours." } },
+        { "@type": "Question", "name": "Do you work with companies outside the UK?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We work with B2B companies across the UK and North America." } }
+      ]
+    }
+    </script>
+  </head>
   <body>
     <div id="root">
       <!--
@@ -93,42 +147,65 @@
         in the initial HTML payload for search engines to index.
       -->
       <div style="max-width:800px;margin:0 auto;padding:2rem;font-family:system-ui,sans-serif;color:#0f172a;">
-        <h1>Adverve — B2B Outreach Infrastructure That Books Meetings</h1>
-        <p>Not another marketing agency. We design, build and manage the backend systems behind high-performance B2B outreach campaigns.</p>
+        <h1>Adverve — Cold Outreach That Books Meetings, Built and Run For You</h1>
+        <p>For B2B founders with a good offer and no system behind it. We set up the domains, lists, sequences and CRM, then run the campaigns week to week. Live in about a week, and you own everything we build.</p>
+        <p>22 clients served · 48 campaigns launched · UK &amp; North America</p>
 
         <h2>What We Do</h2>
         <ul>
-          <li><strong>Outreach System Builds</strong> — Full campaign setup from list to booked call. ICP definition, list building, sequence architecture, inbox warm-up, and deliverability setup.</li>
+          <li><strong>Outreach System Builds</strong> — Full campaign setup from list to booked call, live in about a week. ICP definition, list building, sequence architecture, inbox warm-up, and deliverability setup.</li>
           <li><strong>Ongoing Campaign Management</strong> — Continuous A/B testing, weekly performance reporting, reply handling, and lead handoff.</li>
           <li><strong>List Building &amp; Data Enrichment</strong> — Clay-powered enrichment workflows, email and LinkedIn verification, ZoomInfo and intent data integration.</li>
           <li><strong>CRM &amp; Workflow Integration</strong> — GoHighLevel setup and automation, lead routing, pipeline management, cross-platform workflow automation.</li>
-          <li><strong>Website Design</strong> — Clean, conversion-focused websites built and handed over ready to use.</li>
+          <li><strong>Websites &amp; Outreach Landing Pages</strong> — Clean, conversion-focused sites and landing pages, built and handed over ready to use.</li>
         </ul>
 
         <h2>How It Works</h2>
         <ol>
-          <li><strong>Discovery Call</strong> — We learn your ICP, current setup, and goals.</li>
-          <li><strong>System Build</strong> — We build the full outreach stack: lists, sequences, tooling, CRM.</li>
-          <li><strong>Managed &amp; Optimised</strong> — We own the backend. You focus on closing.</li>
+          <li><strong>Discovery Call</strong> — We learn your ICP, current setup and goals, then tell you exactly what needs building and what needs fixing.</li>
+          <li><strong>System Build</strong> — We build the full outreach stack in your accounts and get it live in about a week.</li>
+          <li><strong>Managed &amp; Optimised</strong> — We run and optimise it with weekly reporting. You focus on closing, and everything we build stays yours.</li>
         </ol>
 
+        <h2>Packages</h2>
+        <ul>
+          <li><strong>Outbound Launch</strong> — from £2,500 one-off. The full outreach system, built in your accounts and live in about a week.</li>
+          <li><strong>Managed Outbound</strong> — from £1,500 per month. Campaign management, reply handling, fresh lists and weekly reporting.</li>
+          <li><strong>Data Sprint</strong> — from £750 one-off. A targeted, Clay-enriched, verified list, ready to import.</li>
+        </ul>
+
         <h2>Our Stack</h2>
-        <p>Clay, Smartlead, HeyReach, ZoomInfo, GHL, Lemlist, LinkedIn Sales Navigator, B2B Rocket.</p>
+        <p>Clay, Smartlead, HeyReach, ZoomInfo, GoHighLevel, Lemlist, LinkedIn Sales Navigator, B2B Rocket.</p>
 
         <h2>About the Founder</h2>
-        <p>I started Adverve after spending years chasing the idea of becoming an entrepreneur without quite finding the right vehicle for it. The turning point was helping my aunt grow her coaching business to $1M in revenue in just 18 months &mdash; that's what showed me outreach infrastructure, done properly, is a genuine unlock for service businesses that have a good offer but no system behind it.</p>
-        <p>From there I went deep on AI &mdash; spending a few months in Thailand going all-in on learning how to apply it to outreach, list building, and campaign automation. Since then I've built and run backend outreach systems for clients across the UK and North America, and expanded into website design for businesses that need both the traffic engine and the storefront to convert it.</p>
-        <p>Adverve exists because most businesses don't need another marketing agency &mdash; they need someone who'll actually build and own the infrastructure.</p>
+        <p>Adverve started with one result: the outreach system behind my aunt's coaching business, which grew to $1M in revenue in 18 months. It showed me that most service businesses don't have an offer problem &mdash; they have a system problem.</p>
+        <p>Since then I've built and run backend outreach systems for clients across the UK and North America &mdash; Clay enrichment, cold email and LinkedIn sequences, deliverability, and CRM automation.</p>
+        <p>You work with me directly, not an account manager. Everything we build lives in your accounts and stays yours.</p>
         <p><strong>Owen Cawston</strong>, Founder</p>
 
-        <h2>What Clients Say</h2>
+        <h2>What Outreach Clients Say</h2>
         <blockquote>"Had our systems running within a week, supporting outreach across 9 clients simultaneously." — Jody Parkinson</blockquote>
         <blockquote>"Helped us close local millionaires in Quebec for our wealth management business." — Thomas Barry</blockquote>
-        <blockquote>"Built me a high converting website for my appliance repair business, good communication and regular SEO and site updates made when necessary." — James Smith <small style="color:#64748b;">Website Design client</small></blockquote>
-        <blockquote>"Took my bakery website from 0 to hero, helped me add a shop and booking reservation on top of redesigning the whole site, highly recommend." — Louise D <small style="color:#64748b;">Website Design client</small></blockquote>
 
-        <h2>Contact</h2>
-        <p>Book a discovery call. No commitment required, 100% confidential, response within 24 hours.</p>
+        <h2>Questions Founders Ask</h2>
+        <h3>How quickly will our outreach be live?</h3>
+        <p>Usually about a week from kickoff to the first campaign going out. New sending inboxes are warmed up first, so volume ramps up over the following weeks rather than starting at full speed.</p>
+        <h3>Who owns the domains, inboxes and data?</h3>
+        <p>You do. Everything is set up in your own accounts — sending domains, inboxes, lists, sequences and CRM workflows. If we stop working together, you keep all of it.</p>
+        <h3>What does it cost?</h3>
+        <p>A full outreach system build starts from £2,500 as a one-off. Ongoing campaign management starts from £1,500 a month, and a standalone list-building and enrichment project starts from £750. Exact pricing depends on volume and channels, and we confirm it on the call.</p>
+        <h3>Will cold email hurt our main domain?</h3>
+        <p>No. Campaigns send from separate secondary domains with SPF, DKIM and DMARC set up and inboxes warmed before anything goes out, so your main domain’s reputation stays protected.</p>
+        <h3>What do you need from us?</h3>
+        <p>A clear offer, a short kickoff on who your ideal customer is, and access to your CRM — or we set one up for you in GoHighLevel. We handle the lists, copy, tooling and sending.</p>
+        <h3>Why not hire an SDR or do it in-house?</h3>
+        <p>An SDR still needs the data, tooling, deliverability setup and CRM behind them, and takes months to ramp. We build that system and run it for less than the cost of a hire — and if you do bring outreach in-house later, the whole system is already yours.</p>
+        <h3>Do you work with companies outside the UK?</h3>
+        <p>Yes. We work with B2B companies across the UK and North America.</p>
+
+        <h2>Book a 30-minute outreach review</h2>
+        <p>No commitment, reply within 24 hours, and you leave with a fix list either way. <a href="https://app.lemcal.com/@owenc/adverve">Book a call</a> or email <a href="mailto:owen@adverve.io">owen@adverve.io</a>.</p>
+        <p><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>

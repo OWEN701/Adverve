@@ -1,0 +1,23 @@
+# Adverve
+
+> Adverve builds and runs B2B cold outreach systems (cold email + LinkedIn) for founders of small B2B companies in the UK and North America. Founded and run by Owen Cawston (UK). Systems go live in about a week and are built in the client's own accounts, so the client owns the domains, inboxes, data and playbooks.
+
+## Services
+- Outreach system builds: ICP definition, list building, sequence architecture, inbox warm-up and deliverability setup
+- Ongoing campaign management: A/B testing, reply handling, lead handoff, weekly reporting
+- List building and data enrichment: Clay workflows, email and LinkedIn verification, ZoomInfo and intent data
+- CRM and workflow integration: GoHighLevel setup, lead routing, pipeline automation
+- Websites and outreach landing pages
+
+## Packages (starting prices)
+- Outbound Launch: from £2,500 one-off
+- Managed Outbound: from £1,500 per month
+- Data Sprint: from £750 one-off
+
+## Stack
+Clay, Smartlead, HeyReach, ZoomInfo, GoHighLevel, Lemlist, LinkedIn Sales Navigator, B2B Rocket
+
+## Contact
+- Book a 30-minute call: https://app.lemcal.com/@owenc/adverve
+- Email: owen@adverve.io
+- Website: https://www.adverve.io/

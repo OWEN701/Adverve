@@ -1,8 +1,9 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useRef } from "react";
 import { Warp } from "@paper-design/shaders-react";
-import { useReducedMotion } from "motion/react";
+import { useInView, useReducedMotion } from "motion/react";
 
 function cn(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
@@ -34,11 +35,16 @@ export interface ShaderCardProps {
  */
 export default function ShaderCard({ index = 0, children, className }: ShaderCardProps) {
   const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  // Only run the WebGL canvas while the card is on (or near) screen — five live
+  // shaders at once is a lot of GPU on mid-range phones.
+  const inView = useInView(ref, { margin: "200px 0px" });
   const colors = PALETTES[index % PALETTES.length];
   const shape = index % 2 === 0 ? ("checks" as const) : ("stripes" as const);
 
   return (
     <div
+      ref={ref}
       className={cn(
         "group relative overflow-hidden rounded-2xl border border-slate-700",
         "transition-all duration-300 hover:border-cyan-500 hover:-translate-y-2",
@@ -47,7 +53,7 @@ export default function ShaderCard({ index = 0, children, className }: ShaderCar
       )}
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {reduceMotion ? (
+        {reduceMotion || !inView ? (
           <div
             className="h-full w-full"
             style={{
