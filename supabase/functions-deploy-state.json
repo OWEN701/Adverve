@@ -1,0 +1,13 @@
+{
+  "projectId": "59099528",
+  "functions": {
+    "chat": {
+      "hasChanged": false,
+      "hash": "aa7ccab635981cf66b0bf384db7f0112b714a7d025beba8b35864670d62c2532"
+    },
+    "contact-form": {
+      "hasChanged": false,
+      "hash": "84a2607ef4f7f9456520495704cf8a1fe759a712da9fda9be11608a9c3590fd7"
+    }
+  }
+}

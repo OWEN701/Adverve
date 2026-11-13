@@ -111,7 +111,7 @@ async function callAnthropic(apiKey: string, messages: ApiMessage[]): Promise<An
   });
 
   if (!res.ok) {
-    throw new Error(`Anthropic API error ${res.status}`);
+    throw new Error(`Anthropic API error ${res.status}: ${(await res.text()).slice(0, 500)}`);
   }
   return (await res.json()) as AnthropicResponse;
 }
